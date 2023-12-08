@@ -65,7 +65,8 @@ async def transcriptions(file: UploadFile = File(...)):
 
     pipeline = get_model()
 
-    transcription = pipeline(temp_file_path, return_timestamps=True)
+
+    transcription = pipeline(temp_file_path, return_timestamps="word" if os.getenv("RETURN_TIMESTAMPS") == "word" else True)
 
 
     os.remove(temp_file_path)
